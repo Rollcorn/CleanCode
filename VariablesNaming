@@ -1,0 +1,209 @@
+/******************************************************************************************
+ * Код взят с сайта:
+ * https://www.cyberforum.ru/java-beginners/thread2955030.html
+ * класс с инструментом рисования 
+ * */ 
+
+package com.company;
+ 
+import javax.swing.JPanel;
+import java.awt.*; 
+
+public class Canvas extends JPanel {
+    // x - axisX, y - axisY, a - axisA
+    int axisX = 100, axisY = 100, axisA = 200;
+ 
+    public Canvas(){
+        setPreferredSize(new Dimension(600, 600));
+        setBackground(Color.WHITE);
+    }
+
+    // xx - coordinatesOnAxisX, yy - coordinatesOnAxisY, aa - coordinatesOnAxisA
+    void setCoords(int coordinatesOnAxisX, int coordinatesOnAxisY, int coordinatesOnAxisA) {
+        axisX = coordinatesOnAxisX;
+        axisY = coordinatesOnAxisY;
+        axisA = coordinatesOnAxisA;
+    }
+ 
+    // g - graphicContext
+    public void paintRect(Graphics graphicContext) {
+        /*super.paintComponents(g);
+        Graphics2D g2d=(Graphics2D)g;*/
+        graphicContext.setColor(Color.BLUE);
+        graphicContext.drawRect(axisX, axisY, axisA, axisA);
+        super.repaint();
+    }
+}
+
+
+/*******************************************************************************************
+ * https://www.cyberforum.ru/java-beginners/thread2955020.html
+ */
+
+import java.util.Arrays;
+ 
+public class DecrementingCarousel {
+    // capicity - arrayCapacity
+    int arrayCapacity;
+    // elements - arrayOfElements
+    static int[] elements;
+    // size - currentNumberOfElems
+    int currentNumberOfElems = 0;
+    // called - statusOfCalling
+    boolean called;
+ 
+    public DecrementingCarousel(int capacity) {
+        arrayCapacity = capacity;
+        arrayOfElements = new int[arrayCapacity];
+    }
+ 
+    public boolean addElement(int element) {
+        if (element <= 0 || arrayOfElements.length == currentNumberOfElems) {
+            return false;
+        }
+        arrayOfElements[currentNumberOfElems++] = element;
+        return true;
+    }
+ 
+    public CarouselRun run() {
+        if (!statusOfCalling) {
+            arrayOfElements = Arrays.copyOf(arrayOfElements, currentNumberOfElems);
+            statusOfCalling = true;
+            return new CarouselRun();
+        } else {
+            return null;
+        }
+    }
+}
+
+
+/************************************************************************************************
+ *  https://www.cyberforum.ru/cpp-beginners/thread2220042.html 
+ */
+
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <map>
+#include <vector>
+#include <set>
+using namespace std;
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////Soul//////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+class Soul
+{
+    public:
+    // hp - charactersHelthPoints
+    int charactersHelthPoints=1000;
+    // dmg - charactersDamage
+    int charactersDamage=100;
+    // agile - characterAgileLevel
+    int characterAgileLevel=10;
+    // intel - characterIntelegenceLevel
+    int characterIntelegenceLevel=10;
+    // intel - characterEndurenceLevel
+    int characterEndurenceLevel=10;
+    // name - charactersName
+    string charactersName;
+
+    Soul()
+    {
+        cout << "Null soul" << endl;
+    }
+    Soul(int _hp,int _dmg,int _agil,int _intel,int _endur,string _name)
+    {
+        charactersHelthPoints += _hp;
+        charactersDamage += _dmg;
+        characterAgileLevel += _agil;
+        characterIntelegenceLevel += _intel;
+        characterEndurenceLevel += _endur;
+        charactersName = _name;
+        cout << "Soul created" << endl;
+    }
+    Soul(int _hp,int _dmg,int _agil,int _intel,int _endur)
+    {
+        charactersHelthPoints += _hp;
+        charactersDamage += _dmg;
+        characterAgileLevel += _agil;
+        characterIntelegenceLevel += _intel;
+        characterEndurenceLevel += _endur;
+        cout << "Soul created" << endl;
+    }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////Race///////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+class Man:public virtual Soul
+{
+    public:
+    Man():Soul(100,20,10,50,30,"Null")
+    {
+        cout << "Man created" << endl;
+    }
+    Man(string _name):Soul(100,20,10,50,30,_name)
+    {
+        cout << "Man created" << endl;
+    }
+    void get_data()
+    {
+        cout << "HP: " << charactersHelthPoints << " Damage: " << charactersDamage << " Agility: " << characterAgileLevel << " Intelect: "
+             << characterIntelegenceLevel << " Endurance: " << characterEndurenceLevel << " Name: " << charactersName << endl;
+    }
+};
+class Orc:public virtual Soul
+{
+    public:
+    Orc():Soul(500,100,0,10,200,"Null")
+    {
+        cout << "Orc created" << endl;
+    }
+    Orc(string _name):Soul(100, 20, 10, 50, 30, _name)
+    {
+        cout << "Orc created" << endl;
+    }
+    void get_data()
+    {
+        cout << "HP: " << charactersHelthPoints << " Damage: " << charactersDamage << " Agility: " << characterAgileLevel << " Intelect: "
+             << characterIntelegenceLevel << " Endurance: " << characterEndurenceLevel << " Name: " << charactersName << endl;
+    }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////Class//////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+class Warrior:public virtual Soul
+{
+    public:
+    Warrior():Soul(200,200,50,10,100)
+    {
+        cout<<"Warrior created"<<endl;
+    }
+    void get_data()
+    {
+        cout<<"HP: "<<hp<<" Damage: "<<dmg<<" Agility: "<<agil<<" Intelect: "<<intel<<" Endurance: "<<endur<<endl;
+    }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////Сharacter//////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+class Man_Warior:public Warrior, public Man
+{
+    public:
+    Man_Warior(string _name):Man(_name),Warrior()
+    {
+        cout<<"Man Warrior created"<<endl;
+    }
+    void get_data()
+    {
+        cout<<"HP: "<<hp<<" Damage: "<<dmg<<" Agility: "<<agil<<" Intelect: "<<intel<<" Endurance: "<<endur<<" Name: "<<name<<endl;
+    }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+int main()
+{
+    Man_Warior a("Sange");
+    a.get_data();
+}
