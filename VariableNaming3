@@ -3,10 +3,10 @@
 
     https://github.com/Rollcorn/ServerClientApp/blob/main/src/C_Client.cpp
 
-    1)  bool isInit = false;   // успешность 
+    1)  bool isInit = false;   // успешность инициализации сокета
     2)  bool isSend = false;    // результат отправки данных
     3)  bool isRecv = false;    // Результат получения данных
-    4)  bool isWork = false;   // Успешность 
+    4)  bool isWork = false;   // Статус работы сокета
 
 
 7.2. Найдите несколько подходящих случаев, когда в вашем коде можно 
@@ -14,8 +14,7 @@
 
     1)
         https://github.com/Rollcorn/AlgorithmsLessons/blob/main/Lesson1/LinkedList.java#L48
-        ;   было без переменной - ввел переменную статуса успешности выполнения 
-        ;   удаления переменной из списка.
+        ;   было без переменной - ввел переменную статуса успешности выполнения - success удаления переменной из списка.
 
         public boolean remove(int a_value)
         {
