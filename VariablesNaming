@@ -67,7 +67,7 @@ public class DecrementingCarousel {
  
     public CarouselRun run() {
         if (!statusOfCalling) {
-            arrayOfElements = Arrays.copyOf(arrayOfElements, currentNumberOfElems);
+            arrayOfElements = Arrays.copyOf( arrayOfElements, currentNumberOfElems);
             statusOfCalling = true;
             return new CarouselRun();
         } else {

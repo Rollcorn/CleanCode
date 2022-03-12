@@ -1,0 +1,158 @@
+7.1. Приведите пять примеров правильного именования булевых переменных в 
+     вашем коде в формате "было - стало".
+
+    https://github.com/Rollcorn/ServerClientApp/blob/main/src/C_Client.cpp
+
+    1)  bool isInit = false;   // успешность 
+    2)  bool isSend = false;    // результат отправки данных
+    3)  bool isRecv = false;    // Результат получения данных
+    4)  bool isWork = false;   // Успешность 
+
+
+7.2. Найдите несколько подходящих случаев, когда в вашем коде можно 
+     использовать типичные имена булевых переменных.
+
+    1)
+        https://github.com/Rollcorn/AlgorithmsLessons/blob/main/Lesson1/LinkedList.java#L48
+        ;   было без переменной - ввел переменную статуса успешности выполнения 
+        ;   удаления переменной из списка.
+
+        public boolean remove(int a_value)
+        {
+            boolean success = false;
+            
+            if(this.count() != 0)
+            {
+                Node node = this.head;
+                if (node.value == a_value)
+                {
+                    this.head = node.next;
+                    node.next = null;
+                    if(this.count() == 0) this.tail = null;
+                    success = true;
+                }
+            
+                while ( node.next != null && !success ) 
+                {
+                    if (node.next.value == a_value)
+                    {
+                        Node tmp = node.next;
+                        node.next = node.next.next;
+                        tmp.next = null;
+                        if(null == node.next) this.tail = node;
+                        success =  true; // если узел был удалён
+                    } else node = node.next;
+                }
+            }
+            return success;    
+        }
+
+    2)
+        https://github.com/Rollcorn/AlgorithmsLessons/blob/main/Lesson9/NativeDictionary.java
+        ; equals - found
+        public boolean isKey(String a_key)
+        {
+            int hashKey = hashFun(a_key);
+            boolean found = false;
+
+            for ( int count = 0 ; !found && (count < size) && (slots[hashKey] != null); count++, hashKey = (hashKey + 3) % size ){
+
+                if( slots[hashKey].length() != a_key.length() ){
+                    continue;
+                }
+
+                for( int i = 0 ; i != a_key.length(); i++){
+                    if( slots[hashKey].charAt(i) != a_key.charAt(i)){
+                        found = false;
+                        break;
+                    } else {
+                        found = true;
+                    }
+                }
+                if ( found ) {
+                    found = true;
+                }
+            }
+
+            return found;
+        }
+
+
+7.3. Проверьте, правильно ли вы даёте имена индексам циклов. Попробуйте 
+     найти случай, когда вместо i j k нагляднее использовать более 
+     выразительное имя.
+
+        https://github.com/Rollcorn/AlgorithmsLessons_2/blob/main/Lesson3/src/ru/shkandyuk/aBST.java
+        ; i - currentIndex
+        public Integer FindKeyIndex(int key) {
+            Integer keyIndex = null;
+
+            // ищем в массиве индекс ключа
+            for ( int currentIndex = 0; currentIndex < Tree.length && keyIndex == null; ) {
+                Integer currentKey = Tree[currentIndex];
+
+                if ( currentKey == null ){
+                    keyIndex = -currentIndex;
+                }
+                else if ( currentKey == key ) {
+                    keyIndex = currentIndex;
+                }
+                else if ( key < currentKey  ) {
+                    currentIndex = getLeftChildIndex(currentIndex);
+                }
+                else {
+                    currentIndex = getRightChildIndex(currentIndex);
+                }
+            }
+            return keyIndex; 
+        }
+
+
+7.4. Попробуйте найти в своих решениях два-три случая, когда можно 
+     использовать пары имён - антонимы.
+
+    1)
+        bool open  = false;     // Результат открытия соединения сокета
+        bool close  = false;    // Результат открытия соединения сокета
+    
+    2)
+        bool setup = false;  // Результат запуска сокета
+        bool flush = false;  // Результат отключения сокета
+
+    3)
+        bool read = false;  // Результат чтения
+        bool write = false;  // Результат записи
+
+
+7.5. Всем ли временным переменным в вашем коде присвоены выразительные 
+     имена? Найдите несколько случаев, когда временные переменные надо 
+     переименовать, и поищите, возможно, от некоторых временных переменных 
+     вам получится вообще полностью избавиться.
+
+        https://github.com/Rollcorn/AlgorithmsLessons_2/blob/main/Lesson3/src/ru/shkandyuk/aBST.java
+
+        ; curKey - currentKey
+        ; ret - keyIndex
+        public Integer FindKeyIndex(int key) {
+            Integer keyIndex = null;
+
+            // ищем в массиве индекс ключа
+            for ( int index = 0; index < Tree.length && rkeyIndexet == null; ) {
+                Integer currentKey = Tree[index];
+
+                if ( currentKey == null ){
+                    keyIndex = -index;
+                }
+                else if ( currentKey == key ) {
+                    keyIndex = index;
+                }
+                else if ( key < currentKey  ) {
+                    index = getLeftChildIndex(index);
+                }
+                else {
+                    index = getRightChildIndex(index);
+                }
+            }
+
+            return keyIndex; 
+        }
