@@ -1,0 +1,54 @@
+
+https://github.com/Rollcorn/AlgorithmsLessons/blob/main/Lesson2/LinkedList2.java
+1)  value - nodeValue
+2)  next - nextNode
+3)  prev - prevNode
+
+   class Node
+    {
+        public int value;
+        public Node next;
+        public Node prev;
+
+        public Node(int _value) 
+        { 
+        value = _value; 
+        next = null;
+        prev = null;
+        }
+    }
+
+4) tmp = linkOnNextNode
+    Node tmp = node.next;
+
+https://github.com/Rollcorn/AlgorithmsLessons/blob/main/Lesson3/DynArray.java
+
+5) array - arrayBuffer
+6) count - amountOfElemsInArray
+7) capacity - arrayCapacity
+8) minCapacity - capacityMin
+9) clazz - typeOfArrayElems
+public class DynArray<T>
+{
+  public T [] array;            // Буфер памяти
+  public int count;             // Количество элементов в массиве
+  public int capacity;          // Размер буфера
+  public int minCapacity = 16;  // Минимальный размер буфера
+  Class clazz;                  // Тип хранимых элементов
+  ...
+
+
+10) https://github.com/Rollcorn/AlgorithmsLessons/blob/cd3d58e8d92efaac1924058c2589fc26f2b6d587/Lesson3/DynArray.java#L86
+    tmpItem - tempLinkOnArrayItem
+    T tmpItem;
+
+11) https://github.com/Rollcorn/AlgorithmsLessons/blob/cd3d58e8d92efaac1924058c2589fc26f2b6d587/Lesson4/Stack.java#L51
+    resVar - currentCalculationResult
+    int resVar;
+12) tmpVar - tempCalculationResult
+    int tmpVar;
+
+13) res - stackOfCalculating       
+    Stack<Integer> res = new Stack<Integer>();
+
+
