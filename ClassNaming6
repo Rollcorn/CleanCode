@@ -1,0 +1,59 @@
+3.1. Улучшите пять имён классов в вашем коде.
+
+https://github.com/Rollcorn/spring-project/tree/master/src/main/java/com/coursera/spring
+1)  CompositionsController
+    AuthorsCintroller
+    StudiosController
+
+    Все имена приводятся в соответствии с абстракцией Controller.
+
+2)  ApiError - ErrorApi
+    ApiErrorResponse - ErrorResponseApi
+    ApiExceptionHandler - ExceptionHandlerApi
+
+    Имена классов говорят о там что они представляют собой абстракцию
+    API.
+
+3)  CompositionsRepository
+    AuthorsRepository
+    StudiosRepository
+
+    Все имена приводятся в соответствии с абстракцией Repository.
+
+
+4)  CompositionsView
+    AuthorsView
+    StudiosView
+
+    Все имена приводятся в соответствии с абстракцией View.
+
+5) MessageUtil
+
+
+3.2. Улучшите семь имён методов и объектов по схеме из 
+пункта 2.
+
+1)  initSocket()
+
+
+2)  setup()
+
+
+3)  setNonblock()
+
+
+4)  openConnection()
+
+
+5)  recvData()
+
+
+6)  sendData()
+
+
+7)  closeConnection()
+
+
+
+
+
