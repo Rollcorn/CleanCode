@@ -1,0 +1,39 @@
+Выполните 12 улучшений имён функций/методов в вашем коде в формате 
+"было - стало - ваш комментарий", и выложите на гитхаб.
+
+    Контекст класс сокета клиент-серверного приложения: 
+    https://github.com/Rollcorn/ServerClientApp/blob/main/src/C_UDPSocket.h
+1)  name() - возвращает имя сокета ( {ip}:{port} ) 
+
+2)  setup( std::string a_ipParam, std::string a_portParam, int a_optFlag )
+    - запускает сокет
+
+3)  open() - выполняет открытие сокета на привязанном адрессе 
+
+4)  reciev( const std::string a_remoteIp, const std::string a_remotePort,
+                       char *a_data, int *a_recvSize )
+    - получение данных из сокета
+
+5)  send( std::string a_remoteIp, std::string a_remotePort,
+                       std::string a_data, int *a_sendSize )
+    - отправка данных в сокет
+
+6)  close() - закрытие сокета
+
+7)  flush() - освобождение рессурсов
+
+8)  setNonblock() - установить сокет в неблокирующий режим
+
+    Контекст: класс клиента клиент-серверного приложения
+    https://github.com/Rollcorn/ServerClientApp/blob/main/src/C_Server.h
+9)  setup( std::map<std::string, std::string> a_conParam)
+
+
+10) setup( std::map<std::string, std::string> a_conParam) - запуск сервера 
+    с переданными параметрами
+
+11) workingSession( ) - процессы работы клиента
+
+12) communication( int messPerSec, int workDuration ) - бизнес логика обмена данными
+    клиента с сервером
+
