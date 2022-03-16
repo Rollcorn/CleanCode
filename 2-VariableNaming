@@ -1,0 +1,83 @@
+6.1. Разберите свой код, и сделайте пять примеров, где можно
+     более наглядно учесть в именах переменных уровни абстракции.
+
+     Клиент для клиент серверного приложения
+     https://github.com/Rollcorn/ServerClientApp/blob/main/src/C_Client.h
+    1) bufSize - sizeOfBufferForMessage
+    2) blocking - nonblockingClientState
+
+    https://github.com/Rollcorn/ServerClientApp/blob/main/src/C_UDPSocket.h
+    3) type - typeOfSocketTransferProtocol
+
+    https://github.com/Rollcorn/AlgorithmsLessons_2/blob/main/Lesson7/src/main/java/SimpleGraph.java
+    4) vertex - arrayOfGraphVertexes
+       vertex = new Vertex[size];
+
+    5) max_vertex - maxGraphVertexesAmount
+
+6.2. Приведите четыре примера, где вы в качестве имён
+     переменных использовали или могли бы использовать технические 
+     термины из информатики.
+
+     1)
+          https://github.com/Rollcorn/AlgorithmsLessons_2/blob/main/Lesson7/src/main/java/SimpleGraph.java
+          ; Определение стека использемого как очередь
+          Stack<Integer> queue = new Stack<>();
+
+     2) 
+          https://github.com/Rollcorn/ServerClientApp/blob/main/src/C_Client.h
+          ; Объявление экземляра сокета
+          I_Socket* m_socket = nullptr;
+
+     3)
+          ; Фабричный метод создания сокета
+          I_Socket * socketFabric( std::string a_protoName )
+
+     4)
+          ; cтатус закрытия соединения сокета
+          bool flushResult = false;
+
+
+6.3. Придумайте или найдите в своём коде три примера, когда имена 
+     переменных даны с учётом контекста (функции, метода, класса).
+
+    1) BSTNode<T> Root; // корень дерева, или null
+    2) public int NodeKey;    // ключ узла
+    3) public BSTNode<T> Parent;     // родитель или null для корня
+    4) public BSTNode<T> LeftChild;  // левый потомок
+    5) public BSTNode<T> RightChild; // правый потомок
+
+
+
+6.4. Найдите пять имён переменных в своём коде, длины которых не 
+     укладываются в 8-20 символов, и исправьте, чтобы они 
+     укладывались в данный диапазон.
+     
+     1)
+         https://github.com/Rollcorn/AlgorithmsLessons_2/blob/main/Lesson2/src/ru/shkandyuk/BST.java
+
+          public int CountNode(BSTNode<T> fromNode) {
+               ; count - numberOfNodesInTree
+               int numberOfNodesInTree = 0;
+               if (fromNode != null) {
+                    numberOfNodesInTree = 1 + CountNode(fromNode.LeftChild) + CountNode(fromNode.RightChild);
+               }
+               return numberOfNodesInTree; // количество узлов в дереве
+          }
+
+     2)
+          ; mList - listOfNodes
+          ArrayList<BSTNode> listOfNodes = new ArrayList<>();
+
+     3)
+          ; curNode - currentNode
+          BSTNode<T> currentNode = aFromNode;
+
+     4)
+          ; bstArr - bbstSortedArray
+          int[] bbstSortedArray = new int[a.length];
+
+     5)
+          https://github.com/Rollcorn/AlgorithmsLessons/blob/main/Lesson9/NativeDictionary.java
+          ;  equals - statusOfKeysEquals
+          boolean statusOfKeysEquals = false;
