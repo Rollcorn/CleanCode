@@ -1,0 +1,63 @@
+    Внесите 12 правок в свой код, в которых улучшите работу с константами, и 
+    напишите по каждой, что конкретно вы улучшили.
+
+1)  https://github.com/Rollcorn/ServerClientApp/blob/main/src/C_Client.h
+    const int m_BufSize - const int BUFFER_SIZE
+
+2)  https://github.com/Rollcorn/ServerClientApp/blob/main/src/C_UDPSocket.h
+    const int MAXLINE - const int MAX_MESSAGE_LEN
+
+3)  Констата задающее простое число для вычисления хэшфункции  
+    final int SIMPLE_NUM = 31;
+    Так как в программе могут встретиться и другие значения определил в 
+    имени значение
+    final int SIMPLE_NUM_31 = 31;
+
+4)  Стандартный размер массива
+    private static final int CAPACITY = 20000;
+
+5)  Стандартный шаг хэшфункции при коллизии
+    private static final int STEP = 3;
+
+6)  https://github.com/Rollcorn/AlgorithmsLessons/blob/cd3d58e8d92efaac1924058c2589fc26f2b6d587/Lesson12/src/ru/shkandyuk/NativeCache.java#L137
+    Заменил магическую тройку в переопрделения хэшключа на константу
+    final int HASHKEY_STEP = 3;
+
+7)  https://github.com/Rollcorn/AlgorithmsLessons/blob/cd3d58e8d92efaac1924058c2589fc26f2b6d587/Lesson3/DynArray.java#L12
+    public int minCapacity = 16;  // Минимальный размер буфера
+    public int MIN_ARRAY_CAPACITY = 16;  // Минимальный размер буфера
+
+8)  https://github.com/Rollcorn/AlgorithmsLessons/blob/cd3d58e8d92efaac1924058c2589fc26f2b6d587/Lesson9/NativeDictionary.java#L31
+    Заменил магическую тройку в переопрделении хэшключа на константу
+    final int HASHKEY_STEP = 3;
+
+9)  https://github.com/Rollcorn/AlgorithmsLessons/blob/cd3d58e8d92efaac1924058c2589fc26f2b6d587/Lesson3/DynArray.java#L12
+    Заменил магическую 31 в расчете хэшключа на константу
+    public int SIMPLE_NUM_31 = 31;  
+
+10) https://github.com/Rollcorn/AlgorithmsLessons_2/blob/5c4c2c069c28ffdbb05079584f2630b6aeb6c885/Lesson2/src/ru/shkandyuk/BST.java#L199
+    
+    public ArrayList<BSTNode> DeepAllNodes( int order ){
+        ArrayList<BSTNode> mList = new ArrayList<>();
+
+        if( order == 0 ){
+            mList.addAll( InOrederTrav(Root) );
+        }
+        if( order == 2 ) {
+            mList.addAll( PreOrederTrav(Root) );
+        }
+
+        if ( order == 1){
+            mList.addAll( PostOrederTrav(Root) );
+        }
+        return mList;
+    }
+
+    0 - static final int IN_ORDER_TRAVERSAL = 0;
+
+11) 1 - static final int POST_ORDER_TRAVERSAL = 1;
+
+
+12) 2 - static final int PRE_ORDER_TRAVERSAL = 2;
+
+
