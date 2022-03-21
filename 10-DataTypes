@@ -1,0 +1,61 @@
+1)  Введена переменная результата запуска сокета
+        bool isOkSetupRes = m_socket->setup( m_ownIp, m_ownPort, 
+                                    m_blocking ); // Результат запуска сокета
+
+2)  Введена переменная результата обращения клиента
+        bool isOkComunicatinonRes = communication( a_messPerSec, a_workDuration );
+
+3)  Введена переменная результата закрытия соединия сокета
+        bool isOkFlushRes = m_socket->flush();
+
+4)  Введена переменная результата закрытия соединия сокета
+        bool  isOkSending = m_socket->send( m_remIp, m_remPort, strMessage, 
+                                    &sendSize ); // результат отправки данных
+
+5)  Введена переменная результата закрытия соединия сокета
+        bool  isOkReseiving = m_socket->recv( m_remIp, m_remPort, buffer, 
+                                    &recvSize ); // Результат получения данных
+
+6)  Введена переменная результата открытия соединия сокета
+        bool isOkSockBind  = bind( m_sockFd, (struct sockaddr *)m_ownAddr, 
+                    sizeof(*m_ownAddr) ); // Результат открытия соединения сокета
+
+7)  Введена переменная результата закрытия соединия сокета
+        bool discRes = m_socket->close();
+
+8)  https://github.com/Rollcorn/ServerClientApp/blob/c81c8fa3895e0fe412445c7ac157521c321db6d9/src/C_Client.cpp#L146
+    Запрос клиента к сокету.
+        std::string strMessage = "Give me a number!"; // Запрос клиента
+    Заменил на константу так как строка не изменяется
+        const std::string strMessage = "Give me a number!"; // Запрос клиента
+
+9)  Стратегия интернационализации форматов валют
+        NumberFormat usFormat = NumberFormat.getCurrencyInstance(Locale.US);
+        String us = usFormat.format(payment);
+
+        NumberFormat indiaFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN") );
+        String india = indiaFormat.format(payment);
+
+
+10) https://github.com/Rollcorn/Contests/blob/main/LeetCode/189-Rotate-Array/Solution.java
+    Вынес сложное условие цикла в отдельную переменную типа bool
+    currentIndex < (((arrSize-numRotates)/ 2) + numRotates)
+
+11) https://github.com/Rollcorn/Contests/blob/main/HackerRank/JavaExceptionHandling.java
+    Проверка на деление на ноль
+    if( y == 0 ){
+        throw new ArithmeticException("/ by zero");
+    }
+    System.out.println( x / y );
+
+
+12) Проверка на переполнение
+        if( x >= -128 && x <= 127 )
+            System.out.println("* byte");
+        if( x >= -32768 && x <= 32767 )
+            System.out.println("* short");
+        if( x >= -2147483648 && x <= 2147483647 )
+            System.out.println("* int");
+        if( x >= -9223372036854775808L && x <= 9223372036854775807L)
+            System.out.println("* long");
+
