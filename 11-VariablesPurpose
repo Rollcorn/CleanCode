@@ -1,0 +1,101 @@
+1. Явно объявляйте все переменные
+2. Инициализируйте каждую переменную, и делайте это правильно
+3. Завершение работы с переменными
+4. Переменные и циклы
+5. Инварианты в коде
+
+
+https://github.com/Rollcorn/ServerClientApp/blob/main/src/C_Client.h
+    Для данного класса сетевого клиента выполнил иницициализацию полей 
+    при их объявлении. Примеры с 1) по 5)
+1)  std::string m_ownIp; - std::string m_ownIp = "*****ERROR*****";
+
+2)  std::string m_ownPort; - std::string m_ownPort = "*****ERROR*****";
+
+3)  std::string m_remIp; - std::string m_remIp = "*****ERROR*****";
+
+4)  std::string m_remPort; - std::string m_remPort = "*****ERROR*****";
+
+5)  int m_blocking; - int m_blocking = -1;
+
+6)  https://github.com/Rollcorn/Contests/blob/main/LeetCode/167-Two-Sum-II-Input-Array-Is-Sorted/Solution.java
+    int middleArrayIndex; - int middleArrayIndex = (rightIndex - leftIndex) / 2;
+
+7)  https://github.com/Rollcorn/Contests/blob/main/LeetCode/189-Rotate-Array/Solution.java
+    int tempElem; - int tempElem = -1;
+
+    
+8)  https://github.com/Rollcorn/Contests/blob/main/LeetCode/557-Reverse-Words-in-a-String-III/Solution.java
+    Добавил отладочный код с асертами в следующий код
+    Было:
+    public static void main(String[] args) {
+        String s1 = "Let's take LeetCode contest";
+        String s2 = "God Ding";
+        
+        Solution s = new Solution();
+
+        System.out.println(s1);
+        System.out.println(s.reverseWords(s1));
+
+        System.out.println(s2);
+        System.out.println(s.reverseWords(s2));
+    }
+        Стало 1:
+        String enterS1 = "Let's take LeetCode contest";
+        String returnS1 = "s'teL ekat edoCteeL tsetnoc";
+        
+        System.out.println(enterS1);
+        s1 = s.reverseWords(enterS1);
+        assert s1.equals(returnS1);
+        System.out.println();
+
+9)  Стало 2:
+        String enterS2 = "God Ding";
+        String returnS2 = "doG gniD";
+
+        System.out.println(enterS2);
+        s2 = s.reverseWords(enterS2);
+        System.out.println(s2);
+        assert s2.equals(returnS2);
+
+
+10) https://github.com/Rollcorn/Contests/blob/main/LeetCode/704-Binary-Search/Solution.java
+    Добавил отладочный код с асертами в следующий код:
+
+    Было:
+        public static void main(String[] args) {
+            int[] arr1 = {1, 2, 3, 4, 5, 6, 7, 8};
+
+            Solution s = new Solution();
+
+            System.out.println("Search 10 - " + s.search(arr1, 10));
+            System.out.println("Search -1 - " + s.search(arr1, -1));
+            System.out.println("Search 1 - " + s.search(arr1, 1));
+            System.out.println("Search 2 - " + s.search(arr1, 2));
+            System.out.println("Search 3 - " + s.search(arr1, 3));
+            System.out.println("Search 4 - " + s.search(arr1, 4));
+            System.out.println("Search 5 - " + s.search(arr1, 5));
+            System.out.println("Search 6 - " + s.search(arr1, 6));
+            System.out.println("Search 7 - " + s.search(arr1, 7));
+            System.out.println("Search 8 - " + s.search(arr1, 8));
+
+        }
+    
+    Стало 1:
+        assert s.search(arr1, 10) == -1 : "FAIL - s.search(arr1, 10) == -1";
+
+11) Стало 2:
+        assert s.search(arr1, -1) == -1 : "FAIL - s.search(arr1, -1) == -1";
+
+12) Стало 3:        
+        assert (s.search(arr1, 1) == 0) : "FAIL - s.search(arr1, 1) == 0";
+
+13) Стало 4:
+        assert (s.search(arr1, 2) == 1) : "FAIL - s.search(arr1, 2) == 1";
+
+14) Стало 5:
+        assert (s.search(arr1, 3) == 2) : "FAIL - s.search(arr1, 3) == 2";
+
+15) Стало 6:
+        assert (s.search(arr1, 4) == 3) : "FAIL - s.search(arr1, 4) == 3";
+
