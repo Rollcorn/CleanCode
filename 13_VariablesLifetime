@@ -1,0 +1,283 @@
+/*********************************************************
+ * 1. Минимизируйте область видимости каждой переменной
+ *  локальной для отдельного цикла ---> 
+ *  локальной для конкретного метода/функции --->
+ *  приватной переменной класса (с максимальным уровнем приватности) ---> 
+ *  включить её в модуль/пакет/пространство имён ---> глобальной.
+ * 
+ * 2. Группируйте связанные команды
+ * 
+ **********************************************************/
+1)  Для того чтобы уменьшить область видемости из метода  twoSum(int[] numbers, int target) 
+    была выделена отдельная функция findTarget(int[] nums, int target, int currIndex )
+    https://github.com/Rollcorn/Contests/blob/main/LeetCode/167-Two-Sum-II-Input-Array-Is-Sorted/Solution.java
+
+2)  Внес переменную middleArrayIndex в тело цикла, так как снаружи 
+    она не используется, но увеличивает риск ошибок
+    
+    Было:
+        public int findTarget(int[] nums, int target, int currIndex ) {
+            int leftIndex = 0;
+            int rightIndex = nums.length - 1;
+            int middleArrayIndex;
+
+            while( leftIndex <= rightIndex ) {
+
+                middleArrayIndex = leftIndex + (rightIndex - leftIndex) / 2;
+
+                if ( nums[middleArrayIndex] == target  && (middleArrayIndex != currIndex) ) {
+                    return middleArrayIndex;
+                } 
+                if( target < nums[middleArrayIndex] ){
+                    rightIndex = middleArrayIndex - 1;
+                } else {
+                    leftIndex = middleArrayIndex + 1;
+                }
+            }        
+            return -1;
+        }
+
+    Стало:
+        public int findTarget(int[] nums, int target, int currIndex ) {
+            int leftIndex = 0;
+            int rightIndex = nums.length - 1;
+
+            while( leftIndex <= rightIndex ) {
+                int middleArrayIndex = leftIndex + (rightIndex - leftIndex) / 2;
+
+                if ( nums[middleArrayIndex] == target  && (middleArrayIndex != currIndex) ) {
+                    return middleArrayIndex;
+                } 
+                if( target < nums[middleArrayIndex] ){
+                    rightIndex = middleArrayIndex - 1;
+                } else {
+                    leftIndex = middleArrayIndex + 1;
+                }
+            }        
+            return -1;
+        }
+
+3)  Внес переменную secondIndex в тело цикла, так как снаружи 
+    она не используется, но увеличивает риск ошибок.
+    
+    Было:
+        public int[] twoSum(int[] numbers, int target) {
+            int[] arrIndexes = new int[2];
+            int secondIndex = 0;
+
+            for( int firstIndex = 0; firstIndex < numbers.length; firstIndex++ ){
+                secondIndex = findTarget( numbers, target - numbers[firstIndex], firstIndex );
+
+                if ( secondIndex + 1 != 0   ) {
+                    arrIndexes[0] = firstIndex + 1;
+                    arrIndexes[1] = secondIndex + 1;
+                    return arrIndexes;
+                } 
+            }
+            return null;
+        }
+
+    Стало:
+        public int[] twoSum(int[] numbers, int target) {
+            int[] arrIndexes = new int[2];
+            
+            for( int firstIndex = 0; firstIndex < numbers.length; firstIndex++ ){
+                int secondIndex = findTarget( numbers, target - numbers[firstIndex], firstIndex );
+
+                if ( secondIndex + 1 != 0   ) {
+                    arrIndexes[0] = firstIndex + 1;
+                    arrIndexes[1] = secondIndex + 1;
+                    return arrIndexes;
+                } 
+            }
+            return null;
+        }
+
+4)  По рекомендации сгруппировать связанные команды 
+    перенес переменную MaxSubMatrix ближе к месту
+    применения.
+
+    Было:
+        public int largestSubmatrix(int[][] matrix) {
+            int MaxSubMatrix = 0;
+            int rowNumber = matrix.length;
+            int colomnNumber = matrix[0].length;
+
+            int[] colomHeight = new int[colomnNumber];
+
+            for ( int i = 0; i < rowNumber; i++ ){
+
+                // calculate heights
+                for ( int j = 0; j < colomnNumber; j++ ) { 
+                    if ( matrix[i][j] == 0 ){
+                        colomHeight[j] = 0;
+                    } else {
+                        colomHeight[j] += 1;
+                    }  
+                }
+
+    			// sort colomns
+                int[] sortedColomHeight = colomHeight.clone();
+                Arrays.sort(sortedColomHeight);
+
+                for(int j = 0; j < sortedColomHeight.length; j++ ){
+                    MaxSubMatrix = Math.max(MaxSubMatrix, 
+                        ( sortedColomHeight[j] * (sortedColomHeight.length - j) ));
+                }
+
+            }
+            return MaxSubMatrix;
+        }
+
+    Стало:
+        public int largestSubmatrix(int[][] matrix) {
+            int rowNumber = matrix.length;
+            int colomnNumber = matrix[0].length;
+            int[] colomHeight = new int[colomnNumber];
+
+            for ( int i = 0; i < rowNumber; i++ ){
+
+                // calculate heights
+                for ( int j = 0; j < colomnNumber; j++ ) { 
+                    if ( matrix[i][j] == 0 ){
+                        colomHeight[j] = 0;
+                    } else {
+                        colomHeight[j] += 1;
+                    }  
+                }
+
+    			// sort colomns
+                int[] sortedColomHeight = colomHeight.clone();
+                Arrays.sort(sortedColomHeight);
+
+                int MaxSubMatrix = 0;
+                for(int j = 0; j < sortedColomHeight.length; j++ ){
+                    MaxSubMatrix = Math.max(MaxSubMatrix, 
+                        ( sortedColomHeight[j] * (sortedColomHeight.length - j) ));
+                }
+            }
+            return MaxSubMatrix;
+        }
+
+5)  Внес переменную tempElem в тело цикла, так как снаружи 
+    она не используется, но увеличивает риск ошибок. В функции 3 последовательных 
+    цикла for, соответственно теперь у каждого своя переменная for
+    https://github.com/Rollcorn/Contests/blob/6decec2df260427ec8e76c42e40b44e12d4da414/LeetCode/189-Rotate-Array/Solution.java#L18
+
+    Было:
+        int tempElem;
+        int numRotates = k % nums.length;
+
+        // Разворот массива за N/2
+        for ( int currentIndex = 0; currentIndex != arrSize / 2; currentIndex++, rightIndex--) {
+            tempElem = nums[currentIndex];
+            nums[currentIndex] = nums[rightIndex];
+            nums[rightIndex] = tempElem;
+        }
+
+    Стало:
+        int numRotates = k % nums.length;
+
+        // Разворот массива за N/2
+        for ( int currentIndex = 0; currentIndex != arrSize / 2; currentIndex++, rightIndex--) {
+            int tempElem = nums[currentIndex];
+            nums[currentIndex] = nums[rightIndex];
+            nums[rightIndex] = tempElem;
+        }
+
+6)  Внес переменную middleArrayIndex в тело цикла, так как снаружи 
+    она не используется, но увеличивает риск ошибок. 
+    https://github.com/Rollcorn/Contests/blob/main/LeetCode/278-First-Bad-Version/Solution.java
+
+    Было:
+        public int firstBadVersion(int n) {
+        
+            int firstVersion = 0;
+            int lastVersion = n;
+            int middleArrayIndex = n / 2;
+            while( (lastVersion - firstVersion) != 1 ) {
+                if ( isBadVersion(middleArrayIndex) ) {
+                    lastVersion = middleArrayIndex;
+                } else {
+                    firstVersion = middleArrayIndex;
+                }
+                middleArrayIndex = firstVersion + (lastVersion - firstVersion) / 2;
+            }            
+            return lastVersion;
+        }
+    Стало:
+         public int firstBadVersion(int n) {
+        
+            int firstVersion = 0;
+            int lastVersion = n;
+    
+            while( (lastVersion - firstVersion) != 1 ) {
+                int middleArrayIndex = firstVersion + (lastVersion - firstVersion) / 2;
+
+                if ( isBadVersion(middleArrayIndex) ) {
+                    lastVersion = middleArrayIndex;
+                } else {
+                    firstVersion = middleArrayIndex;
+                }
+            }         
+            return lastVersion;
+        }
+
+7)  Внес переменную middleArrayIndex в тело цикла, так как снаружи 
+    она не используется, но увеличивает риск ошибок. 
+    https://github.com/Rollcorn/Contests/blob/main/LeetCode/35-Search-Insert-Position/Solution.java
+
+    Было:
+        public int firstPositiveIndex(int[] nums){
+            int beginArrayIndex = 0;
+            int endOfArrayIndex = nums.length - 1;
+            int middleArrayIndex = endOfArrayIndex / 2;
+
+            while( (endOfArrayIndex - beginArrayIndex) >= 1 ) {
+                if ( nums[middleArrayIndex] >= 0 ) {
+                    endOfArrayIndex = middleArrayIndex;
+                } else {
+                    beginArrayIndex = middleArrayIndex + 1;
+                }
+                middleArrayIndex = beginArrayIndex + (endOfArrayIndex - beginArrayIndex) / 2;
+            }            
+            return beginArrayIndex;
+        }
+
+    Стало:
+        public int firstPositiveIndex(int[] nums){
+            int beginArrayIndex = 0;
+            int endOfArrayIndex = nums.length - 1;
+
+            while( (endOfArrayIndex - beginArrayIndex) >= 1 ) {
+                int middleArrayIndex = beginArrayIndex + (endOfArrayIndex - beginArrayIndex) / 2;
+                if ( nums[middleArrayIndex] >= 0 ) {
+                    endOfArrayIndex = middleArrayIndex;
+                } else {
+                    beginArrayIndex = middleArrayIndex + 1;
+                }
+            }            
+            return beginArrayIndex;
+        }
+
+8)  https://github.com/Rollcorn/ServerClientApp/blob/working/src/C_Client.cpp
+    Изначально переменная m_ownAddr была полем класса UdpSocket
+    struct sockaddr_in *m_ownAddr = nullptr;  // структура адреса собственного сокета IPv4
+    Я уменьшил область видимости переменной внеся эту переменную внутрь методов использующих её.
+
+9)  Аналогично примеру №8 уменьшил область видимости переменной m_remoteAddr.
+    struct sockaddr_in *m_remoteAddr = nullptr;  // структура адреса удаленного сокета IPv4
+
+10) 
+
+11)
+
+12)
+
+13)
+
+14)
+
+15)
+
+
