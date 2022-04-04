@@ -1,0 +1,86 @@
+1)  https://github.com/Rollcorn/Contests/blob/main/LeetCode/1727-Largest-Submatrix-With-Rearrangements/Solution.java
+    Изменил итерирование по массиву, так как мне нужно только значениев ячейке.
+        for(int j = 0; j < sortedColomHeight.length; j++ ){
+            MaxSubMatrix = Math.max(MaxSubMatrix, 
+                ( sortedColomHeight[j] * (sortedColomHeight.length - j) ));
+        }
+
+        int j = 0;
+        for (int colHeiht : sortedColomHeight ){
+            MaxSubMatrix = Math.max(MaxSubMatrix, 
+                ( colHeiht * (sortedColomHeight.length - j) ));
+            ++j;
+        }
+
+
+2)  https://github.com/Rollcorn/Contests/blob/main/LeetCode/2085-Count-Common-Words-With-One-Occurrence/Solution.java
+    Задача была получить строку и вернуть строку в которой каждое слово развернуть. 
+    Сначала я сделал массив этих для слов 
+        String[] resWords = new String[wordCound];     
+    
+    А потом переделал на список слов
+        List<String> resWords = new ArrayList<>();
+
+
+3)  https://github.com/Rollcorn/Contests/blob/main/LeetCode/283-Move-Zeroes/Solution.java
+    Задача состояла в том чтобы все встреченные нули в массиве переместить в конец массива
+    Убрал явную индексацию
+    Было:
+        for(int i = 0; i != nums.length; i++ ){
+            if(nums[i] != 0){
+                nonZeroArrays[currentIndex] = nums[i];
+                currentIndex++;
+            }
+        }
+    Стало:
+        for( int elem : nums ){
+            if( elem != 0 ){
+                nonZeroArrays[currentIndex] = elem;
+                currentIndex++;
+            }
+        }
+
+    Кроме того можно заменить масив nonZeroArrays на список nonZeroList
+        for( int elem : nums ){
+            if( elem != 0 ){
+                nonZeroList.add(elem);
+            }
+        }
+4)
+        for(int i = 0; i != nums.length; i++ ){
+            nums[i] = nonZeroArrays[i];
+        }
+
+        for( int elem : nums ){
+            if( nonZeroList.hasNext() ){
+                elem = nonZeroList.next();
+            } else {
+                elem = 0;
+            }
+        }
+
+5)  https://github.com/Rollcorn/Contests/blob/main/LeetCode/500-Keyboard-Row/Solution.java
+    Было:
+        for ( int i = 0; i < words.length; ++i) ){
+            String currentWordInLowCase = words[i].toLowerCase();
+            Character firstCharInWord = currentWordInLowCase.charAt(0);
+            if( ( firstRow.contains(firstCharInWord) && isWordBelongToSet(firstRow, currentWordInLowCase) ) ||
+                ( secondRow.contains(firstCharInWord) && isWordBelongToSet(secondRow, currentWordInLowCase) ) ||
+                ( thirdRow.contains(firstCharInWord) && isWordBelongToSet(thirdRow, currentWordInLowCase) ) ) {
+                    result[i] = currentWord;
+            }
+        }
+        return result;
+    
+    Стало:
+        for ( String currentWord : words ){
+            String currentWordInLowCase = currentWord.toLowerCase();
+            Character firstCharInWord = currentWordInLowCase.charAt(0);
+            if( ( firstRow.contains(firstCharInWord) && isWordBelongToSet(firstRow, currentWordInLowCase) ) ||
+                ( secondRow.contains(firstCharInWord) && isWordBelongToSet(secondRow, currentWordInLowCase) ) ||
+                ( thirdRow.contains(firstCharInWord) && isWordBelongToSet(thirdRow, currentWordInLowCase) ) ) {
+                    result.add(currentWord);
+            }
+        }
+        return result.toArray(new String[0]);
+
