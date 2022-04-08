@@ -1,0 +1,133 @@
+1. Информативные комментарии
+2. Представление намерений
+3. Прояснение
+4. Предупреждения о последствиях
+5. Усиление
+6. Комментарии TODO
+
+
+1)  https://github.com/Rollcorn/AlgorithmsLessons/blob/cd3d58e8d92efaac1924058c2589fc26f2b6d587/Lesson10/Test/myAlgo/PowerSetTest.java#L360
+
+    // Проверка работы структуры при больших нагрузках при добавлении 20000 элементов и их ужалении
+    @Test
+    public void testHighload() {
+        PowerSet pwset1 = new PowerSet();
+
+    
+    2-7) https://github.com/Rollcorn/ServerClientApp/blob/main/src/C_Client.cpp
+2)  6. Комментарии TODO
+
+    okSend = m_socket->send( message, m_socket->remoteAddr());
+    if(okSend){
+        std::cout << m_socket->name() << ":\tClient Sent message ["
+                  << message.data() << "], size: [" << message.size() << "]" << std::endl;
+    } else {
+        std::cout << m_socket->name() << ":\tBAD Send on Client. Errno ["
+                  << strerror(errno) << "]" << std::endl;
+        // TODO обработка errno
+    }
+
+
+3)  5. Усиление. Коментарий указывает на необходимость вызова метода fill.
+
+    // Вызов fill() важен чтобы не получить мусора в данных
+    std::fill( a_buffer.begin(), a_buffer.end(), '\0' ); 
+
+
+4)  1. Информативный комментарий. Добавил цель блока преобразования a_strMessage в message
+
+    // Подготовка данных для метода send(). Размещение строки в векторе.  
+    std::vector<char> message = {a_strMessage.begin(), a_strMessage.end()};
+    message.push_back( '\0' );
+    message.resize(a_strMessage.length() );
+
+
+5)  5. Усиление. Коментарий указывает на необходимость вызова метода resize.
+
+    // Подготовка данных для метода send(). Размещение строки в векторе.  
+    std::vector<char> message = {a_strMessage.begin(), a_strMessage.end()};
+    message.push_back( '\0' );
+    // Вызов resize() важен чтобы не получить мусора в данных    
+    message.resize(a_strMessage.length() );
+
+
+6)  3. Прояснение. Принцип ининициализации lastSendTime.
+
+    // Определение таймера работы клиента
+    auto start  = std::chrono::steady_clock::now();
+    auto end    = start;
+    std::chrono::duration<double> curentWorkTime = end - start;
+    // lastSendTime - это счетчик времени(миллисекунд) прошедших с момента последней отправки сообщения
+    // инициализируется значением start - s_sendTimout чтобы первая отправка началась мгновенно, без ожидания.
+    // Далее обновляется после отправки текущим значением времени.
+    auto lastSendTime  = start - s_sendTimout;
+
+
+7)  2. Представление намерений. 
+    ...
+    } while ( okSend && okRecv && (curentWorkTime.count() <= a_workDuration) );
+
+    // Даем сигнал серверу что комуникация законченна.
+    bool okEndConn = send(s_endConnMessage);
+
+
+8)  6. Комментарии TODO
+
+    // TODO добавить проверку на другие значения errno
+    do {
+        okRecv = m_socket->recv( a_buffer, a_fromAddr );
+    } while( !(okRecv && errno != ERR_BUFEMPT) );
+
+    if (okRecv) {
+        std::cout << m_socket->name() << ":\tServer Recived message ["
+                  << a_buffer.data() << "], size: ["
+                  << a_buffer.size() << "], from [" << a_fromAddr << "]" << std::endl;
+    } else {
+
+        if ( errno == ERR_BADRECV ){
+            std::cout << m_socket->name() << ":\tBAD Recieve on Server Side."
+                      << std::endl;
+        } else {
+            std::cout << m_socket->name() << ":\tUnexpectred Error"
+                      << ":\tUnexpectred Error: " << strerror(errno)<< std::endl;
+        }
+    }
+
+
+
+9)  6. Комментарии TODO
+
+    if (!m_isEndConnSignal) {
+        // Генерируется случайное число
+        int num = dist(gen);
+
+        // Подготовка сообщения
+        std::string messageStr = std::to_string(num);
+        messageVec = {messageStr.begin(), messageStr.end() };
+        messageVec.push_back('\0');
+        messageVec.resize(messageStr.length());
+
+        // TODO добавить проверку errno после отправки
+        sendRes = m_socket->send( messageVec, fromAddr );
+    } else { ...
+
+
+10) https://github.com/Rollcorn/Contests/blob/main/LeetCode/74-Search-a-2D-Matrix/Solution.java
+    1. Информативные комментарии
+
+            // Проверка что мы не вышли за пределы массива
+            if ( beginInd >= matrix.length || endInd < 0 ) {
+                return false;
+            } 
+
+11) 1. Информативные комментарии    
+    // Поиск подходящей строки что таргет может лежать в данной строке
+    while (  beginInd != endInd && !((matrix[rowMiddle][0] <= target) && (matrix[rowMiddle][matrix[0].length - 1] >= target)) ) {
+
+
+
+12) 3. Прояснение
+        // Обновляем значения начала и конца  интервала поиска для столбцов
+        beginInd = 0;
+        endInd = matrix[0].length - 1;
+
