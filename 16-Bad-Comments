@@ -1,0 +1,147 @@
+1. Неочевидные комментарии
+2. Бормотание
+3. Недостоверные комментарии
+4. Шум
+5. Позиционные маркеры
+6. Комментарии за закрывающей фигурной скобкой
+7. Избыточные комментарии
+8. Слишком много информации
+9. Нелокальная информация
+10. Обязательные комментарии
+11. Закомментированный код
+12. Не используйте комментарии там, где можно использовать функцию или переменную
+
+
+1)  https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Client.cpp#L122
+    Согласно пункту 12. Выделил из метода comunication() отельную функцию send()
+    в которой и просиходит подготовка данных и попытка отправки.  
+
+
+2)  https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Client.cpp#L148
+    Согласно пункту 12. Выделил из метода comunication() отельную функцию recv()
+    в которой просиходит подготовка буфера и попытка ожидание данных.
+
+
+3)  https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L236
+    Согласно пункту 12. Выделил из метода comunication() отельную функцию recv()
+    в которой просиходит подготовка буфера и попытка ожидание данных.
+
+
+4)  https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L216
+    // Попытка освобождения ресурсов соединения
+    flushRes = m_socket->flush();
+    if ( discRes && flushRes ) {
+        std::cout << m_socket->name() << ":\tSERVER SOCK CLOSED SUCCESS. " << std::endl;
+    }
+    else {
+        std::cout << m_socket->name() << ":\tBAD Socket closed on Server. " << std::endl;
+    }
+
+    Пункт 4. Этот коментарий удалил так как он говорил об очевидном.
+
+
+5)  https://github.com/Rollcorn/ServerClientApp/blob/working/src/C_Server.cpp#L216
+    // Попытка закрытия соединения
+    discRes = m_socket->close();
+    if (discRes) {
+        std::cout << m_socket->name()
+                  << ":\tServer Socket diconnected successfully. " << std::endl;
+    }
+    else {
+        std::cout << m_socket->name() << ":\tBAD Socket diconnect. " << std::endl;
+    }
+    
+    Пункт 4. Этот коментарий удалил так как он говорил об очевидном.
+
+
+6)  https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L157
+    // Попытка получения запроса от клиента
+    std::string fromAddr;
+    recvRes = recv( buffer, fromAddr);
+    
+    Пункт 4. Этот коментарий удалил так как он говорил об очевидном.
+
+
+7)  https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L152
+    // Очищение буфера
+    std::fill( buffer.begin(), buffer.end(), '\0' );
+
+    Пункт 4. Этот коментарий удалил так как он говорил об очевидном.
+
+
+8)  https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L140
+    // Генерация случайного числа
+    std::random_device  rd;
+    std::mt19937    gen( rd() );
+    int minRandNum  = -100;
+    int maxRandNum  = 100;
+    std::uniform_int_distribution<int> dist( minRandNum, maxRandNum );
+
+    Пункт 12. Вынес этот блок кода в отдельную функцию getRandNum() так
+    код стал читаемее.
+
+9)  https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L118
+    // Попытка закрыть соединение и освободить ресурсы соединения
+    flushRes = flush();
+
+    Пункт 4. Этот коментарий удалил так как он говорил об очевидном.
+
+
+10) https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L109
+    // Попытка запуска комуникации с сервером
+    okWork = communication();
+    if( okWork ) {
+        std::cout << m_socket->name() << ":\tServer Start communacation SUCCESS. " << std::endl;
+    } else {
+        std::cout << m_socket->name() << ":\tServer communacation FAILED. "
+                  << strerror(errno) << std::endl;
+    }
+
+    Пункт 4. Этот коментарий удалил так как он говорил об очевидном.
+
+
+11) https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L82
+    // Попытка открытия сокета клиента
+    openRes = m_socket->open();
+    if (openRes) {
+        std::cout << m_socket->name() << ":\tServer Socket OPENING SUCCESS." << std::endl;
+    } else {
+        std::cout << m_socket->name() << ":\tServer Socket OPENING FAILED." << std::endl;
+    }
+    return setupRes && openRes;
+    
+    Пункт 4. Этот коментарий удалил так как он говорил об очевидном.
+
+
+12) https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L74
+    // Инициализация сокета клиента
+    setupRes = m_socket->setup( a_conParam );
+    if (setupRes) {
+        std::cout << m_socket->name() << ":\tServer Socket CREATING SUCCESS." << std::endl;
+    } else {
+        std::cout << m_socket->name() << ":\tServer Socket CREATING FAILED." << std::endl;
+    }
+
+    Пункт 4. Этот коментарий удалил так как он говорил об очевидном.
+
+
+13) https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L64
+    // Инстанцируем необходимый  сокет
+    m_socket = CreateSocket("UDP");
+
+    Пункт 4. Этот коментарий удалил так как он говорил об очевидном.
+
+
+14) https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L61
+    bool okSetup = false; // Результат запуска сокета
+
+    Пункт 10. Этот коментарий удали, он казался мне необходимым, по сути 
+    имя переменной сейчас говорит за себя.
+
+
+15) https://github.com/Rollcorn/ServerClientApp/blob/b72f00226091ee3f32cd18b389561a5baa486f74/src/C_Server.cpp#L62
+    bool okOpen  = false; // Результат открытия соединения сокета
+
+    Пункт 10. Этот коментарий удалил так как он говорил об очевидном.
+
+
